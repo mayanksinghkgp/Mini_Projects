@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Mar 12 14:42:22 2022
-
+Wordel Solver
 @author: Mayank 
 """
 from nltk.corpus import words
@@ -10,13 +10,15 @@ from nltk.corpus import words
 ### PARAMETERS ###
 word_list = words.words()
 wordle_len = 5
-not_repeat = 0 #1-> no repetition of alphabets; 0-> repetition allowed
+not_repeat = 1 #1-> no repetition of alphabets; 0-> repetition allowed
+
+### CHANGE THESE 3 LINES ###
+corr = 'ed45' #'ane345' : Add the correct words here and location (green)
+incorr = 'llli3512'  # 'arra1245': Add wrongly located words here (yellow)
+exclude = 'tascrun' #Add the words to be excluded
 ###
-corr = 'asl235' #'ane345'
-incorr = 'ls35'  # 'arra1245'
-inclist = list(set(list('lsa')))
-exclist = list(set(list('tebi')))
-###
+exclist = list(set(list(exclude)))
+inclist = list(set(list(incorr[:int((len(incorr)/2))])).union(list(corr[:int((len(corr)/2))])))
 
 wordle_list = []
 posslist = []
@@ -25,7 +27,7 @@ corr_alpha = []
 corr_loc = []
 corralpha_dict = {}
 if len(corr)>0:
-    corr_alpha = list(corr[:int(1+(len(corr)/2))])
+    corr_alpha = list(corr[:int((len(corr)/2))])
     corr_loc = list(corr[int(len(corr)/2):])
     
     for i,j in zip(corr_alpha,corr_loc):
@@ -35,7 +37,7 @@ incorr_alpha = []
 incorr_loc = []
 incorralpha_dict = []
 if len(incorr)>0:
-    incorr_alpha = list(incorr[:int(1+(len(incorr)/2))])
+    incorr_alpha = list(incorr[:int((len(incorr)/2))])
     incorr_loc = list(incorr[int(len(incorr)/2):])
     
     for i,j in zip(incorr_alpha,incorr_loc):
